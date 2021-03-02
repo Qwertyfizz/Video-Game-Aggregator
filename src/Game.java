@@ -93,4 +93,10 @@ public class Game
         this.platform = platform;
     }
 
+
+	@Override
+	public String toString() {
+		return "name: " + name + "\nfilepath: " + filepath + "\nexe: " + exe + "\nplatform: " + platform;
+	}
+
 }

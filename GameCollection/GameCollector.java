@@ -4,13 +4,14 @@ public class GameCollector
 {
     private ArrayList<Game> gameList;
 
-    public
-        void
-        scan(ArrayList<String> filepaths, char scanType, PlatformName platform)
+    public void scan(ArrayList<String> filepaths, char scanType, PlatformName platform)
     {
-
+    	
     }
 
+    public void addGame(Game g) {
+    	gameList.add(g);
+    }
 
     public ArrayList<Game> getGameList()
     {
