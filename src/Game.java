@@ -7,6 +7,7 @@ public class Game
     private String       filepath;
     private String       exe;
     private int			 playtime;
+    private Boolean		 isInstalled;
     private PlatformName platform;
 
     /**

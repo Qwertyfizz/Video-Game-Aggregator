@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -21,9 +17,10 @@ public class Steam extends GameCollector {
 		 */
 		URL url;
 		try {
-			url = new URL(
-					"https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key="+ key +"&steamid=" + steamID + "&include_appinfo=true&include_played_free_games=true&include_free_sub=false");
+			url = new URL("https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key="+ key +"&steamid=" + steamID + "&include_appinfo=true&include_played_free_games=true&include_free_sub=false");
+			
 			System.out.println(InputOutput.processRequest(url));
+			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
