@@ -6,6 +6,7 @@ public class Game
     private String       name;
     private String       filepath;
     private String       exe;
+    private int			 playtime;
     private PlatformName platform;
 
     /**
@@ -22,13 +23,12 @@ public class Game
         this.platform = platform;
     }
 
-
     public void launch()
     {
         try
         {
             Runtime run = Runtime.getRuntime();
-            run.exec(exe);
+            Process proc = run.exec(exe);
         }
         catch (IOException e)
         {
@@ -65,6 +65,14 @@ public class Game
 
 
     /**
+	 * @return the playtime
+	 */
+	public int getPlaytime() {
+		return playtime;
+	}
+
+
+	/**
      * @param name
      *            the name to set
      */
@@ -92,6 +100,14 @@ public class Game
     {
         this.platform = platform;
     }
+
+
+	/**
+	 * @param playtime the playtime to set
+	 */
+	public void setPlaytime(int playtime) {
+		this.playtime = playtime;
+	}
 
 
 	@Override
