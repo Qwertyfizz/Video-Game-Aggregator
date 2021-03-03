@@ -1,8 +1,21 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import org.apache.commons.io.FileUtils;
 
 public class GameCollector {
 	private ArrayList<Game> gameList;
+
+	/*
+	 * Known Non-Game executables (Crash handlers, common libraries, un-installers,
+	 * etc.) Many games use the same utilities due to engine/OS sharing
+	 */
+	private String[] nonGameLaunchers = { "UnityCrash", "vcredist", "crashpad", "CrashReporter", "Uninstaller",
+			"uninstall", "uins", "gdb", "dotNet", "ModGen", "SystemInfo", "Updater" };
+
+	public GameCollector() {
+		this.gameList = new ArrayList<>();
+	}
 
 	public void scan(ArrayList<String> filepaths, char scanType, PlatformName platform) {
 		for (String filepath : filepaths) {
@@ -12,28 +25,75 @@ public class GameCollector {
 				String tempName = dir.getName();
 				String tempPath = dir.getAbsolutePath();
 				String tempExe = findExe(dir).getAbsolutePath(); // TODO: Implement Exe search algo (See design doc)
-
+				if (!tempExe.contains(">= 2") && !tempExe.contains("None found") && !tempExe.contains("No exes are present")) {
+					System.out.println("Done! Launcher is: " + tempExe);
+				}
+				else {
+					System.out.println("FALURE: " + tempExe.substring(tempExe.lastIndexOf("\\"), tempExe.length()));
+				}
 				gameList.add(new Game(tempName, tempPath, tempExe, platform));
 			}
 		}
 	}
 
 	public File findExe(File directory) {
-		File[] dirList = directory.listFiles();
-		ArrayList<File> exeList = new ArrayList<>();
-		for (File f : dirList) {
-			if (f.getName().contains(".exe") && !f.isDirectory()) {
-				exeList.add(f);
+		System.out.println("Working on " + directory.getName());
+		String[] extention = {"exe"};
+		ArrayList<File> exeList = new ArrayList<>(directorySearch(directory, extention, false));
+		
+		if (exeList.size() == 1) {// If it's the only file in the first directory, It is likely the main exe
+			return exeList.get(0);
+		}
+		else if (exeList.size() >= 2) //Strip out common executables and look again
+		{
+			for (int i = 0; i < exeList.size(); i++) {
+				for (int j = 0; j < nonGameLaunchers.length; j++) {
+					if (exeList.get(i).getName().contains(nonGameLaunchers[j])) {
+						exeList.remove(i);
+						break;
+					}
+				}
+			}
+			if (exeList.size() == 1) {
+				return exeList.get(0);
+			}
+			for(File exe : exeList) {
+				if (exe.getName().toLowerCase().contains("launch")) {
+					return exe;
+				}
 			}
 		}
-		if (exeList.size() == 1) {
-			return exeList.get(0);
-		} else if (exeList.size() >= 2) {
-			// TODO: Implement file diff
-		} else {
-			// TODO: Implement recursive call to search deeper file
+		// Get a list of ALL executables in the directories
+		// Strip out all known non game launchers
+		// look for good hints at which is the correct one (name of game in file(No spaces, Spaces to _), first letters only, etc.)
+		// WILL BE SLOW - AVOID IF POSSIBLE
+		else {
+			String name = directory.getName();
+			exeList.clear();
+			exeList = new ArrayList<>(directorySearch(directory, extention, true));
+			for (int i = 0; i < exeList.size(); i++) {
+				for (int j = 0; j < nonGameLaunchers.length; j++) {
+					if (exeList.get(i).getName().contains(nonGameLaunchers[j])) {
+						exeList.remove(i);
+						break;
+					}
+				}
+			}
+			if (exeList.size() == 1) {
+				return exeList.get(0);
+			}
+			else if (!exeList.isEmpty()) {
+				return new File(" >= 2");
+			}
+			
 		}
-		return null;
+		//Nothing in there! Indicates a left over file from a previously installed game
+		return new File("No exes are present");
+	}
+
+	public Collection<File> directorySearch(File dir, String[] extentions, boolean searchAll) {
+		
+		return FileUtils.listFiles(dir, extentions, searchAll);
 	}
 
 	public void addGame(Game g) {

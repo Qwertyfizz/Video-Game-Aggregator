@@ -71,6 +71,10 @@ public class Game
 	public int getPlaytime() {
 		return playtime;
 	}
+	
+	public String getLauncher() {
+		return exe;
+	}
 
 
 	/**
@@ -113,7 +117,7 @@ public class Game
 
 	@Override
 	public String toString() {
-		return "name: " + name + "\nfilepath: " + filepath + "\nexe: " + exe + "\nplatform: " + platform;
+		return "name: " + name + "\nfilepath: " + filepath + "\nexe: " + exe + "\nplatform: " + platform + "\n";
 	}
 
 }
