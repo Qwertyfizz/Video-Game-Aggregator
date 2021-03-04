@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputOutput {
-	public ArrayList<String> readFile(String filename) {
+	public static ArrayList<String> readFile(String filename) {
 		File file = new File(filename);
 		try (Scanner reader = new Scanner(file)) {
 			ArrayList<String> list = new ArrayList<>();
@@ -24,7 +24,7 @@ public class InputOutput {
 		}
 	}
 
-	public void writeFile(String filename, ArrayList<String> list) {
+	public static void writeFile(String filename, ArrayList<String> list) {
 
 		try (FileWriter writer = new FileWriter(filename)) {
 			for (String s : list) {
@@ -37,7 +37,7 @@ public class InputOutput {
 
 	}
 
-	public void createFile(String filepath) {
+	public static void createFile(String filepath) {
 		try {
 			File newFile = new File(filepath);
 			if (newFile.createNewFile()) {
