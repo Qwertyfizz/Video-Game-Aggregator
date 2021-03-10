@@ -1,8 +1,15 @@
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.awt.Desktop;
+
+import static java.awt.Desktop.*;
+
 
 public class Game {
 
 	private String name;
+	private int appID;
 	private String filepath;
 	private String exe;
 	private int playtime;
@@ -22,12 +29,47 @@ public class Game {
 		this.platform = platform;
 	}
 
+	/**
+	 * @param name
+	 * @param appID
+	 * @param filepath
+	 * @param isInstalled
+	 * @param platform
+	 */
+	public Game(String name, int appID, String filepath, Boolean isInstalled, PlatformName platform) {
+		this.name = name;
+		this.appID = appID;
+		this.filepath = filepath;
+		this.isInstalled = isInstalled;
+		this.platform = platform;
+	}
+	
+	
+
 	public void launch() {
-		try {
-			Runtime run = Runtime.getRuntime();
-			Process proc = run.exec(exe);
-		} catch (IOException e) {
-			e.printStackTrace();
+		switch(platform) {
+		case STEAM:
+			Desktop desktop = getDesktop();
+			URI steamProtocol;
+			try {
+				steamProtocol = new URI("steam://run/" + appID);
+				desktop.browse(steamProtocol);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		default:
+			try {
+				Runtime run = Runtime.getRuntime();
+				Process proc = run.exec(exe);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 		}
 	}
 
