@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
-public class GameCollector {
+public abstract class GameCollector {
 	private ArrayList<Game> gameList;
 	private String gameListFile = "/data/gameList.csv";
 
@@ -19,7 +19,8 @@ public class GameCollector {
 		this.gameList = new ArrayList<>();
 	}
 
-	public void scan(ArrayList<String> filepaths, char scanType, PlatformName platform) {
+	public void scan(ArrayList<String> filepaths, char scanType, PlatformName platform) { // Generic scan of a platforms
+																							// files
 		for (String filepath : filepaths) {
 			File currFilepath = new File(filepath);
 			File[] dirList = currFilepath.listFiles();
@@ -37,6 +38,8 @@ public class GameCollector {
 			}
 		}
 	}
+
+	public abstract void scan(); // Implementation for specific scanning methods per platform
 
 	public File findExe(File directory) {
 		System.out.println("Working on " + directory.getName());
