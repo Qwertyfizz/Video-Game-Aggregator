@@ -3,13 +3,12 @@ import java.util.Scanner;
 
 public class Main {
 
-	// TODO: Replace test code with CIL driver
 	public static void main(String[] args) {
 		boolean quit = false;
 		GameCollector[] collectors = { new Steam() };// TODO: Add platforms as developed and implement automatic
 														// registry detection
 		ArrayList<Game> fullList = new ArrayList<>();
-
+		
 		while (!quit) {
 			String command = "";
 			Scanner input = new Scanner(System.in);
@@ -20,8 +19,6 @@ public class Main {
 			System.out.println("q - quit the program");
 			System.out.println("f - find a game by name");
 			System.out.println("");
-
-			System.out.print("Enter a command: ");
 
 			while (!quit) {
 				System.out.print("Enter a command: ");
@@ -40,7 +37,8 @@ public class Main {
 					}
 					break;
 				case "f":
-
+					Game found = findGame(input, fullList);
+					System.out.println(found);
 					break;
 				case "q":
 					quit = true;
@@ -83,8 +81,55 @@ public class Main {
 		return fullList;
 	}
 
-	public static void findGame() {
-
+	public static Game findGame(Scanner input, ArrayList<Game> fullList) {
+		System.out.print("Enter a name: ");
+		ArrayList<Game> narrowed = new ArrayList<>();
+		boolean quit = false;
+		
+		while (!quit) {
+			String name = input.nextLine();
+			for (Game g : fullList) {
+				if (g.getName().toLowerCase().equals(name.toLowerCase())) {
+					return g;
+				} else if (g.getName().toLowerCase().contains(name.toLowerCase())) {
+					narrowed.add(g);
+				}
+			}
+			if (narrowed.size() == 1) {
+				return narrowed.get(0);
+			}
+			else if (narrowed.isEmpty()){
+				System.out.println("No games with \"" + name + "\" found");
+				return null;
+			}
+			int i = 1;
+			System.out.println("Game names containing \"" + name + "\"\n");
+			for(Game g : narrowed) {
+				System.out.println(i + ") " + g.getName());
+				i++;
+			}
+			System.out.print("\nEnter the number of the game you want (or q to exit): ");
+			while (!quit) {
+				try {
+					String selection = input.nextLine();
+					if (selection.equals("q")) {
+						quit = true;
+						break;
+					}
+					int toInt = Integer.parseInt(selection);
+					if (toInt > i || toInt <= 0) {
+						System.out.print("Input must be beetween 1 and " + i + ": ");
+						continue;
+					}
+					
+					return narrowed.get(toInt-1);
+					
+				} catch (NumberFormatException e) {
+					System.out.print("Input must be a number or q: ");
+				}
+			}
+		}
+		return null;
 	}
 
 }

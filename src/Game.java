@@ -46,7 +46,10 @@ public class Game {
 	
 	
 
-	public void launch() {
+	public boolean launch() {
+		if (Boolean.FALSE.equals(isInstalled)) {
+			return false;
+		}
 		switch(platform) {
 		case STEAM:
 			Desktop desktop = getDesktop();
@@ -71,6 +74,7 @@ public class Game {
 			}
 			break;
 		}
+		return true;
 	}
 
 	/**

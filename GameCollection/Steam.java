@@ -39,7 +39,6 @@ public class Steam extends GameCollector {
 				int appID = Integer.parseInt(parsed[0]);
 				String path = parsed[1];
 				String name = parsed[2];
-				System.out.println("Parsing " + name);
 
 				addGame(new Game(name, appID, path, true, PlatformName.STEAM));
 			}
