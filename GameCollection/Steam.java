@@ -5,6 +5,10 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class Steam extends GameCollector {
+	
+	private final String PLATFORM_INSTALL_KEY = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";
+	private final String PLATFORM_INSTALL_VALUE = "InstallPath";
+	
 	private String[] directories = { "C:\\Steam\\steamapps\\common", ".\\steamapps\\common" };
 	private int steamCount = 0;
 	private static String key = "";
@@ -101,5 +105,15 @@ public class Steam extends GameCollector {
 	 */
 	public static void setSteamID(String steamID) {
 		Steam.steamID = steamID;
+	}
+
+	@Override
+	public boolean checkForPlatform() {
+		if (InputOutput.readRegistry(PLATFORM_INSTALL_KEY, PLATFORM_INSTALL_VALUE) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }

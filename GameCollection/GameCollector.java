@@ -40,6 +40,8 @@ public abstract class GameCollector {
 	}
 
 	public abstract void scan(); // Implementation for specific scanning methods per platform
+	
+	public abstract boolean checkForPlatform(); // Function to check for platform install
 
 	public File findExe(File directory) {
 		System.out.println("Working on " + directory.getName());
