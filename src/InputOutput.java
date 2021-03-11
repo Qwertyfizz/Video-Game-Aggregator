@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
+import com.registry.*;
 
 public class InputOutput {
 	public static ArrayList<String> readFile(String filename) {
@@ -69,5 +70,18 @@ public class InputOutput {
 
 		return null;
 
+	}
+	
+	public static String readRegistry(String keyLoc, String keyName) {
+		RegistryKey key = new RegistryKey(keyLoc);
+		RegistryValue value = key.getValue(keyName);
+		return value.toString();
+	}
+	
+	public static String readRegistry(String root, String keyLoc, String keyName) {
+		RegistryKey rootLoc = new RegistryKey(root);
+		RegistryKey key = new RegistryKey(rootLoc, keyLoc);
+		RegistryValue value = key.getValue(keyName);
+		return value.toString();
 	}
 }
