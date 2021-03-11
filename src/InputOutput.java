@@ -73,15 +73,9 @@ public class InputOutput {
 	}
 	
 	public static String readRegistry(String keyLoc, String keyName) {
-		RegistryKey key = new RegistryKey(keyLoc);
+		RegistryKey key = RegistryKey.parseKey(keyLoc);
 		RegistryValue value = key.getValue(keyName);
-		return value.toString();
-	}
-	
-	public static String readRegistry(String root, String keyLoc, String keyName) {
-		RegistryKey rootLoc = new RegistryKey(root);
-		RegistryKey key = new RegistryKey(rootLoc, keyLoc);
-		RegistryValue value = key.getValue(keyName);
-		return value.toString();
+		String tempVal = value.toString();
+		return tempVal.substring(tempVal.indexOf("Value: ") + 7); // + 7 removes everything up to "Value: " leaving only value requested
 	}
 }
