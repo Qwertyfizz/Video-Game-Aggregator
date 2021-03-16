@@ -24,6 +24,7 @@ public class Game {
 	 */
 	public Game(String name, String filepath, String exe, PlatformName platform) {
 		this.name = name;
+		this.appID = -1;
 		this.filepath = filepath;
 		this.exe = exe;
 		this.platform = platform;
@@ -36,7 +37,7 @@ public class Game {
 	 * @param isInstalled
 	 * @param platform
 	 */
-	public Game(String name, int appID, String filepath, Boolean isInstalled, PlatformName platform) {
+	public Game(String name, int appID, String filepath, boolean isInstalled, PlatformName platform) {
 		this.name = name;
 		this.appID = appID;
 		this.filepath = filepath;
@@ -45,6 +46,15 @@ public class Game {
 	}
 	
 	
+
+	public Game(String name, int appID, String path, String exe, boolean isInstalled, PlatformName platform) {
+		this.name = name;
+		this.appID = appID;
+		this.filepath = path;
+		this.exe = exe;
+		this.isInstalled = isInstalled;
+		this.platform = platform;
+	}
 
 	public boolean launch() {
 		if (Boolean.FALSE.equals(isInstalled)) {
@@ -110,6 +120,20 @@ public class Game {
 	}
 
 	/**
+	 * @return the isInstalled
+	 */
+	public Boolean getIsInstalled() {
+		return isInstalled;
+	}
+
+	/**
+	 * @param isInstalled the isInstalled to set
+	 */
+	public void setIsInstalled(Boolean isInstalled) {
+		this.isInstalled = isInstalled;
+	}
+
+	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -139,7 +163,10 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return name + "," + filepath + ", " + exe + ", " + platform + "\n";
+		return name + "@@@" + appID + "@@@" + filepath + "@@@" + exe + "@@@"
+				+ playtime + "@@@" + isInstalled.toString() + "@@@" + platform + "\n";
 	}
+
+	
 
 }
