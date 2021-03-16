@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.registry.RegistryKey;
+
 public class Main {
 
 	public static void main(String[] args) {
 		boolean quit = false;
-		GameCollector[] collectors = { new Steam() };// TODO: Add platforms as developed and implement automatic
-														// registry detection
+		GameCollector[] collectors = {new Steam(), new GOG()};
+
 		ArrayList<Game> fullList = new ArrayList<>();
 		
 		while (!quit) {
@@ -18,11 +20,13 @@ public class Main {
 			System.out.println("l - List games collected");
 			System.out.println("q - quit the program");
 			System.out.println("f - find a game by name");
+			System.out.println("L - Load saved information");
+			System.out.println("S - Save current information");
 			System.out.println("");
 
 			while (!quit) {
 				System.out.print("Enter a command: ");
-				switch (selector(input, "slqf")) {
+				switch (selector(input, "slqfL")) {
 				case "s":
 					if (!fullList.isEmpty()) {
 						fullList.clear();
@@ -38,14 +42,24 @@ public class Main {
 					break;
 				case "f":
 					Game found = findGame(input, fullList);
-					System.out.println(found);
+					gameSelection(found, input);
+					break;
+				case "L":
+					for (GameCollector gc : collectors) {
+						gc.loadFromFile();
+						for (Game g : gc.getGameList()) {
+							fullList.add(g);
+						}
+					}
 					break;
 				case "q":
 					quit = true;
 					System.out.print("Do you want to save (Y/N): ");
 					command = selector(input, "YN");
 					if (command.equals("Y")) {
-						// TODO: Hook in saving system
+						for (GameCollector gc : collectors) {
+							gc.saveToFile();
+						}
 					}
 					break;
 				default:
@@ -130,6 +144,28 @@ public class Main {
 			}
 		}
 		return null;
+	}
+	
+	public static void gameSelection(Game game, Scanner input) {
+		System.out.print("Game Information\n");
+		System.out.println("Name: " + game.getName());
+		System.out.println("Platform: " + game.getPlatform());
+		if (game.getIsInstalled()) {
+			System.out.println("Filepath: " + game.getFilepath());
+			System.out.println("This game is installed\n");
+			System.out.print("Enter L to launch or q to return to the menu: ");
+			String choice = selector(input, "Lq");
+			if (choice.equals("L")) {
+				game.launch();
+			}
+		}
+		else {
+
+			System.out.println("This game is not installed\n");
+			System.out.print("Press any button to return to the menu");
+			input.nextLine();
+		}
+		
 	}
 
 }
