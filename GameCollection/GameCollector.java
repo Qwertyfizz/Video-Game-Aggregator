@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -6,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class GameCollector {
 	private ArrayList<Game> gameList;
-	private String gameListFile = "/data/gameList.csv";
+	private String gameListFile = "gameList_"+this.getClass().getName()+".txt";
 
 	/*
 	 * Known Non-Game executables (Crash handlers, common libraries, un-installers,
@@ -17,26 +18,6 @@ public abstract class GameCollector {
 
 	public GameCollector() {
 		this.gameList = new ArrayList<>();
-	}
-
-	public void scan(ArrayList<String> filepaths, char scanType, PlatformName platform) { // Generic scan of a platforms
-																							// files
-		for (String filepath : filepaths) {
-			File currFilepath = new File(filepath);
-			File[] dirList = currFilepath.listFiles();
-			for (File dir : dirList) {
-				String tempName = dir.getName();
-				String tempPath = dir.getAbsolutePath();
-				String tempExe = findExe(dir).getAbsolutePath(); // TODO: Implement Exe search algo (See design doc)
-				if (!tempExe.contains(">= 2") && !tempExe.contains("None found")
-						&& !tempExe.contains("No exes are present")) {
-					System.out.println("Done! Launcher is: " + tempExe);
-				} else {
-					System.out.println("FALURE: " + tempExe.substring(tempExe.lastIndexOf("\\"), tempExe.length()));
-				}
-				gameList.add(new Game(tempName, tempPath, tempExe, platform));
-			}
-		}
 	}
 
 	public abstract void scan(); // Implementation for specific scanning methods per platform
@@ -97,14 +78,6 @@ public abstract class GameCollector {
 		return new File("No exes are present");
 	}
 
-	public void saveGameList() {
-		ArrayList<String> output = new ArrayList<>();
-		for (Game g : gameList) {
-			output.add(g.toString());
-		}
-		InputOutput.writeFile(gameListFile, output);
-	}
-
 	public void loadGameList() {
 		ArrayList<String> input = new ArrayList<>();
 		input = InputOutput.readFile(gameListFile);
@@ -144,5 +117,35 @@ public abstract class GameCollector {
 			}
 		}
 		return platList;
+	}
+	
+	public void saveToFile() {
+		ArrayList<String> toSave = new ArrayList<>();
+		
+		File saveFile = InputOutput.createFile(gameListFile);
+		
+		for (Game g : gameList) {
+			toSave.add(g.toString());
+		}
+		
+		InputOutput.writeFile(gameListFile, toSave);
+	}
+	
+	public void loadFromFile() {
+		ArrayList<String> toLoad = InputOutput.readFile(gameListFile);
+		for (String s : toLoad) {
+			String[] gameData = s.split("@@@");
+			
+			String name = gameData[0];
+			int appID = Integer.valueOf(gameData[1]);
+			String filepath = gameData[2];
+			String exe = gameData[3];
+			//int playtime = Integer.valueOf(gameData[4]);
+			boolean installed = (gameData[5].equals("true"));
+			PlatformName platform = PlatformName.valueOf(gameData[6]);
+			
+			addGame(new Game(name, appID, filepath, exe, installed, platform));
+			
+		}
 	}
 }
