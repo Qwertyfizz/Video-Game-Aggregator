@@ -9,8 +9,7 @@ public class Steam extends GameCollector {
 	private static final String PLATFORM_INSTALL_KEY = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";
 	private static final String PLATFORM_INSTALL_VALUE = "InstallPath";
 	
-	private String[] directories = { "C:\\Steam\\steamapps\\common", ".\\steamapps\\common" };
-	private int steamCount = 0;
+	
 	private static String key = "";
 	private static String steamID = "";
 

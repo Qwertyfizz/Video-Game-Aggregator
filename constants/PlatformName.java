@@ -4,7 +4,7 @@ public enum PlatformName {
 	ORIGIN,
 	EPIC,
 	UPLAY,
-	BATTLENET,
+	GOG,
 	OTHER,
 	NONE
 }
