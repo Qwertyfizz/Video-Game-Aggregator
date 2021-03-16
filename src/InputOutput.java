@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import com.registry.*;
 
@@ -38,15 +39,15 @@ public class InputOutput {
 
 	}
 
-	public static void createFile(String filepath) {
+	public static File createFile(String filepath) {
 		try {
 			File newFile = new File(filepath);
-			if (newFile.createNewFile()) {
-
-			}
+			newFile.createNewFile();
+			return newFile;
 		} catch (IOException e) {
 			System.out.println("ERROR:");
 			e.printStackTrace();
+			return null;
 		}
 	}
 
@@ -57,7 +58,6 @@ public class InputOutput {
 			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
 			String inputLine;
-			String output;
 
 			inputLine = in.readLine();
 			in.close();
@@ -74,6 +74,12 @@ public class InputOutput {
 	
 	public static String readRegistry(String keyLoc, String keyName) {
 		RegistryKey key = RegistryKey.parseKey(keyLoc);
+		RegistryValue value = key.getValue(keyName);
+		String tempVal = value.toString();
+		return tempVal.substring(tempVal.indexOf("Value: ") + 7); // + 7 removes everything up to "Value: " leaving only value requested
+	}
+	
+	public static String readRegistry(RegistryKey key, String keyName) {
 		RegistryValue value = key.getValue(keyName);
 		String tempVal = value.toString();
 		return tempVal.substring(tempVal.indexOf("Value: ") + 7); // + 7 removes everything up to "Value: " leaving only value requested
