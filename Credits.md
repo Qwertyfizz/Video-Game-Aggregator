@@ -22,7 +22,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-For json-simple-1.1 and commons-io-2.8.0
+For gson and commons-io-2.8.0
 
                                  Apache License
                            Version 2.0, January 2004

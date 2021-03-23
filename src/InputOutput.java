@@ -7,8 +7,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.registry.*;
 
 public class InputOutput {
@@ -49,6 +50,28 @@ public class InputOutput {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public static void writeJSONFile(ArrayList<Game> list, String filename) {
+		String gameJson = "";
+		Gson gson = new GsonBuilder().create();
+		
+		String json = gson.toJson(list);
+		
+		try (FileWriter writer = new FileWriter(filename)){
+			writer.write(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static Game[] readJSONFile(String json) {
+		Gson gson = new Gson();
+		
+		Game[] gameArray = gson.fromJson(json, Game[].class);
+		
+		return gameArray;
 	}
 
 	public static String processRequest(URL url) {

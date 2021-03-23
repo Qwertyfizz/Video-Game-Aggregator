@@ -7,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class GameCollector {
 	private ArrayList<Game> gameList;
-	private String gameListFile = "gameList_"+this.getClass().getName()+".txt";
+	private String gameListFile = "gameList_"+this.getClass().getName()+".json";
 
 	/*
 	 * Known Non-Game executables (Crash handlers, common libraries, un-installers,
@@ -16,7 +16,7 @@ public abstract class GameCollector {
 	private String[] nonGameLaunchers = { "UnityCrash", "vcredist", "crashpad", "CrashReporter", "Uninstaller",
 			"uninstall", "uins", "gdb", "dotNet", "ModGen", "SystemInfo", "Updater" };
 
-	public GameCollector() {
+	protected GameCollector() {
 		this.gameList = new ArrayList<>();
 	}
 
@@ -120,32 +120,17 @@ public abstract class GameCollector {
 	}
 	
 	public void saveToFile() {
-		ArrayList<String> toSave = new ArrayList<>();
 		
 		File saveFile = InputOutput.createFile(gameListFile);
 		
-		for (Game g : gameList) {
-			toSave.add(g.toString());
-		}
-		
-		InputOutput.writeFile(gameListFile, toSave);
+		InputOutput.writeJSONFile(gameList, gameListFile);
 	}
 	
 	public void loadFromFile() {
-		ArrayList<String> toLoad = InputOutput.readFile(gameListFile);
-		for (String s : toLoad) {
-			String[] gameData = s.split("@@@");
-			
-			String name = gameData[0];
-			int appID = Integer.valueOf(gameData[1]);
-			String filepath = gameData[2];
-			String exe = gameData[3];
-			//int playtime = Integer.valueOf(gameData[4]);
-			boolean installed = (gameData[5].equals("true"));
-			PlatformName platform = PlatformName.valueOf(gameData[6]);
-			
-			addGame(new Game(name, appID, filepath, exe, installed, platform));
-			
+		String json = InputOutput.readFile(gameListFile).get(0);
+		Game[] toLoad = InputOutput.readJSONFile(json);
+		for (Game g : toLoad) {
+			addGame(g);
 		}
 	}
 }
