@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/json-simple-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/jregistry/jregistry-1.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/gson-2.8.6.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Oracle/JavaFX Scene Builder 2.0/runtime/jre/lib/ext/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
