@@ -9,34 +9,29 @@ import static java.awt.Desktop.*;
 public class Game {
 
 	private String name;
-	private int appID;
+	private int appID = -1; //not all platforms show game IDs
 	private String filepath;
 	private String exe;
-	private int playtime;
+	private int playtime = -1; // not all platforms keep records/make those stats recoverable
 	private Boolean isInstalled;
 	private PlatformName platform;
-
+	
 	/**
 	 * @param name
 	 * @param filepath
 	 * @param exe
-	 * @param platform
-	 */
-	public Game(String name, String filepath, String exe, PlatformName platform) {
-		this.name = name;
-		this.appID = -1;
-		this.filepath = filepath;
-		this.exe = exe;
-		this.platform = platform;
-	}
-
-	/**
-	 * @param name
-	 * @param appID
-	 * @param filepath
 	 * @param isInstalled
 	 * @param platform
 	 */
+	public Game(String name, String filepath, String exe, Boolean isInstalled, PlatformName platform) {
+
+		this.name = name;
+		this.filepath = filepath;
+		this.exe = exe;
+		this.isInstalled = isInstalled;
+		this.platform = platform;
+	}
+	
 	public Game(String name, int appID, String filepath, boolean isInstalled, PlatformName platform) {
 		this.name = name;
 		this.appID = appID;
@@ -44,8 +39,6 @@ public class Game {
 		this.isInstalled = isInstalled;
 		this.platform = platform;
 	}
-	
-	
 
 	public Game(String name, int appID, String path, String exe, boolean isInstalled, PlatformName platform) {
 		this.name = name;
