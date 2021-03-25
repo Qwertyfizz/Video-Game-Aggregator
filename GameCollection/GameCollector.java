@@ -78,15 +78,6 @@ public abstract class GameCollector {
 		return new File("No exes are present");
 	}
 
-	public void loadGameList() {
-		ArrayList<String> input = new ArrayList<>();
-		input = InputOutput.readFile(gameListFile);
-		for (String s : input) {
-			String[] temp = s.strip().split(",");
-			gameList.add(new Game(temp[0], temp[1], temp[2], PlatformName.valueOf(temp[3])));
-		}
-	}
-
 	public Collection<File> directorySearch(File dir, String[] extentions, boolean searchAll) {
 
 		return FileUtils.listFiles(dir, extentions, searchAll);

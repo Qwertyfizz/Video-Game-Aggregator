@@ -7,7 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		boolean quit = false;
-		GameCollector[] collectors = {new Steam(), new GOG()};
+		GameCollector[] collectors = {new Steam(), new GOG(), new Epic()};
 
 		ArrayList<Game> fullList = new ArrayList<>();
 		
