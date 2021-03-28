@@ -25,3 +25,4 @@ hs_err_pid*
 
 # various data files
 gameList_*.json
+/.gradle/
