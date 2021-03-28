@@ -1,3 +1,5 @@
+package aggregator;
+
 
 public enum PlatformName {
 	STEAM,

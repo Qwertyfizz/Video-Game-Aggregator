@@ -1,3 +1,5 @@
+package aggregator;
+
 import java.util.List;
 
 import com.registry.*;

@@ -1,3 +1,5 @@
+package aggregator;
+
 
 public class Uplay extends GameCollector {
 

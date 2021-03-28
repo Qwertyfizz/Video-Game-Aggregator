@@ -1,7 +1,8 @@
+package aggregator;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.registry.RegistryKey;
 
 public class Main {
 
@@ -11,7 +12,9 @@ public class Main {
 
 		ArrayList<Game> fullList = new ArrayList<>();
 		
-		while (!quit) {
+		Main2.main(args);
+		
+		while (quit) {
 			String command = "";
 			Scanner input = new Scanner(System.in);
 

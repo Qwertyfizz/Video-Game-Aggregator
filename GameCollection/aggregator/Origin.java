@@ -1,3 +1,5 @@
+package aggregator;
+
 
 public class Origin extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Origin";
