@@ -7,6 +7,5 @@ public enum PlatformName {
 	EPIC,
 	UPLAY,
 	GOG,
-	OTHER,
-	NONE
+	OTHER
 }

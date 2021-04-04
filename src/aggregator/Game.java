@@ -57,11 +57,39 @@ public class Game {
 		}
 		switch(platform) {
 		case STEAM:
-			Desktop desktop = getDesktop();
+			Desktop desktopSteam = getDesktop();
 			URI steamProtocol;
 			try {
 				steamProtocol = new URI("steam://run/" + appID);
-				desktop.browse(steamProtocol);
+				desktopSteam.browse(steamProtocol);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case ORIGIN:
+			Desktop desktopOrigin = getDesktop();
+			URI originProtocol;
+			try {
+				originProtocol = new URI("origin://launchgame/OFB-EAST:" + appID);
+				desktopOrigin.browse(originProtocol);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case UPLAY:
+			Desktop desktopUplay = getDesktop();
+			URI uplayProtocol;
+			try {
+				uplayProtocol = new URI("uplay://launch/" + appID + "/0");
+				desktopUplay.browse(uplayProtocol);
 			} catch (URISyntaxException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -158,9 +186,11 @@ public class Game {
 
 	@Override
 	public String toString() {
-		return name + "@@@" + appID + "@@@" + filepath + "@@@" + exe + "@@@"
-				+ playtime + "@@@" + isInstalled.toString() + "@@@" + platform + "\n";
+		return "Game [name=" + name + ", appID=" + appID + ", filepath=" + filepath + ", exe=" + exe + ", playtime="
+				+ playtime + ", isInstalled=" + isInstalled + ", platform=" + platform + "]";
 	}
+
+	
 
 	
 
