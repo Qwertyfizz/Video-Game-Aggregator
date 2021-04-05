@@ -6,33 +6,31 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aggregator.view.MainViewController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Load" />
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem fx:id="saveButton" mnemonicParsing="false" text="Save" />
+                  <MenuItem fx:id="loadButton" mnemonicParsing="false" text="Load" />
+              <MenuItem fx:id="closeButton" mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+                  <MenuItem fx:id="scanGames" mnemonicParsing="false" onAction="#startGameScan" onMenuValidation="#startGameScan" text="Scan for games" />
+                  <MenuItem mnemonicParsing="false" text="Add game to list" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutButton" mnemonicParsing="false" text="About" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
    </top>
-   <center>
-      <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
    <left>
       <SplitPane dividerPositions="0.2530541012216405" orientation="VERTICAL" prefHeight="575.0" prefWidth="202.0" BorderPane.alignment="CENTER">
          <items>
@@ -50,24 +48,29 @@
                       <RowConstraints maxHeight="73.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField prefHeight="25.0" prefWidth="132.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="searchBox" prefHeight="25.0" prefWidth="132.0" GridPane.columnIndex="1" />
                         <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                        <ChoiceBox prefHeight="15.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <ChoiceBox fx:id="platformChoiceBox" prefHeight="15.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <Label prefHeight="17.0" prefWidth="64.0" text="Platform" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <RadioButton contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="57.0" prefWidth="94.0" text="Show uninstalled games" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="showUnstalled" contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="57.0" prefWidth="94.0" text="Show uninstalled games" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </center>
             </BorderPane>
-            <ListView prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="gameList" prefHeight="200.0" prefWidth="200.0" />
          </items>
       </SplitPane>
    </left>
    <bottom>
       <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" text="Button" />
+          <Button fx:id="addGameButton" mnemonicParsing="false" onAction="#startNewGame" text="Add Game" />
+            <Button fx:id="scanButton" mnemonicParsing="false" onAction="#startGameScan" text="Scan for games" />
+            <Button mnemonicParsing="false" text="Button" />
         </items>
       </ToolBar>
    </bottom>
+   <center>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

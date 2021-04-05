@@ -9,7 +9,7 @@ import org.apache.commons.io.FileUtils;
 
 public abstract class GameCollector {
 	private ArrayList<Game> gameList;
-	private String gameListFile = "gameList_"+this.getClass().getName()+".json";
+	private String gameListFile = "gameList_"+this.getClass().getName().replaceAll("aggregator.", "")+".json";
 
 	/*
 	 * Known Non-Game executables (Crash handlers, common libraries, un-installers,

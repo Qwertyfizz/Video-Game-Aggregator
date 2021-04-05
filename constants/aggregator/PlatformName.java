@@ -2,6 +2,7 @@ package aggregator;
 
 
 public enum PlatformName {
+	ALL,
 	STEAM,
 	ORIGIN,
 	EPIC,
