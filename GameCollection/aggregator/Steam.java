@@ -6,6 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 public class Steam extends GameCollector {
 	
 	private static final String PLATFORM_INSTALL_KEY = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";
@@ -60,19 +62,32 @@ public class Steam extends GameCollector {
 
 	}
 
-	public static void getOwnedGames() {
+	public void getOwnedGames() {
 		/*
 		 * JSON Reference appid: application ID - can be used for store info name: name
-		 * playtime_forever: Playtime in minutes img_icon_url, img_logo_url: images of
-		 * the game's icon and logo Playtime_{OS}_forever: OS specific playtimes? (All
-		 * games return 0 for this field)
+		 * playtime_forever: Playtime in minutes 
+		 * img_icon_url, img_logo_url: images of the game's icon and logo 
+		 * Playtime_{OS}_forever: OS specific playtimes? (All games return 0 for all fields, might be broken)
 		 */
 		URL url;
 		try {
 			url = new URL("https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=" + key + "&steamid="
 					+ steamID + "&include_appinfo=true&include_played_free_games=true&include_free_sub=false");
 			String returnedJSON = InputOutput.processRequest(url);
-			System.out.println(returnedJSON);
+			
+			//remove the begining and ending wrappers, only the game array is needed
+			returnedJSON = returnedJSON.substring(returnedJSON.indexOf('['));
+			returnedJSON = returnedJSON.substring(0, returnedJSON.length()-2);
+			
+			//Remove the unneeded stats for easier processing
+			returnedJSON = returnedJSON.replace("\"has_community_visible_stats\": true,", "");
+			returnedJSON = returnedJSON.replace("\"has_community_visible_stats\": false,", "");
+			
+			Gson gson = new Gson();
+			
+			SteamAPIGame[] gameArray = gson.fromJson(returnedJSON, SteamAPIGame[].class);
+			
+			
 
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
