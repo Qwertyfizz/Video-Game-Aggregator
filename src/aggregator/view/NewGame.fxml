@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aggregator.view.NewGameController">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aggregator.view.NewGameController">
    <center>
       <GridPane alignment="CENTER" gridLinesVisible="true" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -36,7 +37,7 @@
    <bottom>
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <items>
-            <Button fx:id="cancelButton" mnemonicParsing="false"  onAction= "#close" text="Cancel" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#close" text="Cancel" />
             <Button fx:id="addGameButton" mnemonicParsing="false" onAction="#addGame" text="Add game" translateX="160.0" />
          </items>
       </ToolBar>

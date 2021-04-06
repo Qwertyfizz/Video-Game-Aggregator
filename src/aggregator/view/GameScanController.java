@@ -5,8 +5,11 @@ import java.util.ResourceBundle;
 
 import aggregator.GameCollector;
 import aggregator.PlatformName;
+import aggregator.Steam;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class GameScanController {
 
@@ -32,6 +35,9 @@ public class GameScanController {
 
     @FXML
     private Label originNum;
+    
+    @FXML
+    private Button doneButton;
 
     @FXML
     void initialize() {
@@ -55,6 +61,7 @@ public class GameScanController {
 				originNum.setText(gc.getGameList().size() + " games found");
 				break;
 			case STEAM:
+				((Steam) gc).getOwnedGames();
 				steamNum.setText(gc.getGameList().size() + " games found");
 				break;
 			case UPLAY:
@@ -64,5 +71,12 @@ public class GameScanController {
 				break;
         	}
         }
+        
+    }
+    
+    @FXML
+    void close() {
+    	Stage stage = (Stage) doneButton.getScene().getWindow();
+    	stage.close();
     }
 }

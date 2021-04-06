@@ -13,10 +13,10 @@ public class Epic extends GameCollector {
 	/**
 	 *Epic stores game info in .item files
 	 *	scan will(for each .item):
-	 *		Search for "LaunchExecutable": "",
+	 *		Search for ""AppName": "", (This can be used to launch the platforms names (Why not an ID???))
 	 *		if it is empty, move to the next file (it's a Artbook, soundtrack, etc.)
 	 *		else, it is a game!
-	 *				exeName ("LaunchExecutable": "<here>",)
+	 *				exeName ("AppName": "<here>",)
 	 *				name ("DisplayName": "<here>",)
 	 *				filepath ("InstallLocation": "<here>",)
 	 *				isInstalled = true
@@ -44,7 +44,10 @@ public class Epic extends GameCollector {
 					String filepath = "";
 					
 					for (String s : gameData) {
-						if (s.contains("\"LaunchExecutable\": \"")) {
+//						if (s.contains("\"LaunchExecutable\": \"")) {
+//							exe = s.split("\"")[3];
+//						}
+						if(s.contains("\"AppName\": \"")) {
 							exe = s.split("\"")[3];
 						}
 						else if (s.contains("\"DisplayName\": \"")) {
@@ -54,6 +57,8 @@ public class Epic extends GameCollector {
 							filepath = s.split("\"")[3];
 						}
 					}
+					filepath = filepath.replace("\\\\", "\\");
+					exe = exe.replaceAll("\\\\", "\\");
 					addGame(new Game(name, filepath, exe, true, PlatformName.EPIC));
 				}
 				

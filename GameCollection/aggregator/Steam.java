@@ -87,6 +87,20 @@ public class Steam extends GameCollector {
 			
 			SteamAPIGame[] gameArray = gson.fromJson(returnedJSON, SteamAPIGame[].class);
 			
+			for(SteamAPIGame apiG : gameArray) {
+				boolean inList = false;
+				for(Game g : getGameList()) {
+					if(apiG.getAppid() == g.getAppID()) {
+						g.setPlaytime(apiG.playtime_forever);
+						inList = true;
+						break;
+					}
+				}
+				if(!inList) {
+					getGameList().add(new Game(apiG.name,apiG.playtime_forever,false,PlatformName.STEAM));
+				}
+			}
+			
 			
 
 		} catch (MalformedURLException e) {

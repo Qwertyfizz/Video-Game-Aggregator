@@ -10,10 +10,11 @@ import static java.awt.Desktop.*;
 
 public class Game {
 
+
 	private String name;
 	private int appID = -1; //not all platforms show game IDs
 	private String filepath;
-	private String exe;
+	private String exe = "none";
 	private int playtime = -1; // not all platforms keep records/make those stats recoverable
 	private Boolean isInstalled;
 	private PlatformName platform;
@@ -25,7 +26,7 @@ public class Game {
 	 * @param isInstalled
 	 * @param platform
 	 */
-	public Game(String name, String filepath, String exe, Boolean isInstalled, PlatformName platform) {
+	public Game(String name, String filepath, String exe, boolean isInstalled, PlatformName platform) {
 
 		this.name = name;
 		this.filepath = filepath;
@@ -47,6 +48,20 @@ public class Game {
 		this.appID = appID;
 		this.filepath = path;
 		this.exe = exe;
+		this.isInstalled = isInstalled;
+		this.platform = platform;
+	}
+	
+	/**
+	 * @param name
+	 * @param appID
+	 * @param isInstalled
+	 * @param platform
+	 */
+	public Game(String name, int appID, Boolean isInstalled, PlatformName platform) {
+		super();
+		this.name = name;
+		this.appID = appID;
 		this.isInstalled = isInstalled;
 		this.platform = platform;
 	}
@@ -90,6 +105,20 @@ public class Game {
 			try {
 				uplayProtocol = new URI("uplay://launch/" + appID + "/0");
 				desktopUplay.browse(uplayProtocol);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+		case EPIC:
+			Desktop desktopEpic = getDesktop();
+			URI epicProtocol;
+			try {
+				epicProtocol = new URI("com.epicgames.launcher://apps/" + exe + "?action=launch&silent=true");
+				desktopEpic.browse(epicProtocol);
 			} catch (URISyntaxException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -150,6 +179,20 @@ public class Game {
 	}
 
 	/**
+	 * @return the appID
+	 */
+	public int getAppID() {
+		return appID;
+	}
+
+	/**
+	 * @return the exe
+	 */
+	public String getExe() {
+		return exe;
+	}
+
+	/**
 	 * @param isInstalled the isInstalled to set
 	 */
 	public void setIsInstalled(Boolean isInstalled) {
@@ -184,10 +227,23 @@ public class Game {
 		this.playtime = playtime;
 	}
 
+	/**
+	 * @param appID the appID to set
+	 */
+	public void setAppID(int appID) {
+		this.appID = appID;
+	}
+
+	/**
+	 * @param exe the exe to set
+	 */
+	public void setExe(String exe) {
+		this.exe = exe;
+	}
+
 	@Override
 	public String toString() {
-		return "Game [name=" + name + ", appID=" + appID + ", filepath=" + filepath + ", exe=" + exe + ", playtime="
-				+ playtime + ", isInstalled=" + isInstalled + ", platform=" + platform + "]";
+		return name;
 	}
 
 	

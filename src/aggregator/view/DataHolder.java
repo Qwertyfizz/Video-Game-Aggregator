@@ -1,6 +1,3 @@
-/**
- * 
- */
 package aggregator.view;
 
 import java.util.ArrayList;
@@ -18,7 +15,7 @@ import aggregator.Uplay;
  * Singleton class for managing collectors and data
  * Needed for communication between windows
  */
-public final class DataHolder {
+public final class DataHolder{
 	
 	private static final DataHolder INSTANCE = new DataHolder();
 	
@@ -91,6 +88,15 @@ public final class DataHolder {
 	 */
 	public ArrayList<Game> getFullList() {
 		return fullList;
+	}
+	
+	public void refreshMainList() {
+		fullList.clear();
+		for (GameCollector gc : collectors) {
+			for(Game g : gc.getGameList()) {
+				fullList.add(g);
+			}
+		}
 	}
 	
 }

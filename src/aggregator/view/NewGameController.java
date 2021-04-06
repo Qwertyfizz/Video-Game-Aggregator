@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 public class NewGameController {
 
 	private DataHolder holder = DataHolder.getInstance();
+    
+    private File lastBrowsedFile;
 	
     @FXML
     private ResourceBundle resources;
@@ -47,8 +49,6 @@ public class NewGameController {
     
     @FXML
     private Button launcherBrowse;
-    
-    private File lastBrowsedFile;
 
     @FXML
     void initialize() {
