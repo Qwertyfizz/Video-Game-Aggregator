@@ -1,6 +1,8 @@
 package aggregator;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 public class Origin extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Origin";
@@ -10,9 +12,9 @@ public class Origin extends GameCollector {
 	/**
 	 * Origin games can be collected from C:\ProgramData\Origin\LocalContent
 	 * 		each game has a directory
-	 * 		the presence of a OFB-EAST(GameID).dat indicates that the game is installed
+	 * 		the presence of a mfst file indecates the game is installed
 	 * Get Name from folder
-	 * Get ID from .dat filename
+	 * Get ID from &id={GAME_ID}
 	 */
 	@Override
 	public void scan() {
@@ -20,19 +22,33 @@ public class Origin extends GameCollector {
 		for(File game : originGames) {
 			File[] gameDir = game.listFiles();
 			File gameDat = null;
-			for (File f : gameDir) {
-				if (f.getName().contains(".dat") && f.getName().contains("OFB-EAST")) {
-					gameDat = f;
+			for (File file : gameDir) {
+				if (file.getName().contains(".mfst")) {
+					gameDat = file;
 					break;
 				}
 			}
+			
 			if (gameDat != null) {
-				String idName = gameDat.getName();
-				idName = idName.replace(".dat", "");
-				idName = idName.replace("OFB-EAST", "");
+				String gameInfo = InputOutput.readFile(gameDat.getAbsolutePath()).get(0);
+				String gameId = gameInfo.substring(gameInfo.indexOf("&id=")+4);
+				try {
+					gameId = URLDecoder.decode(gameId.substring(0, gameId.indexOf('&')),"UTF-8" );
+				} catch (UnsupportedEncodingException e1) {
+					e1.printStackTrace();
+				}
 				
-				addGame(new Game(game.getName(), Integer.valueOf(idName), game.getAbsolutePath(), true, PlatformName.ORIGIN));
+				String gamePath = gameInfo.substring(gameInfo.indexOf("&dipinstallpath=") + 16);
+				try {
+					gamePath = URLDecoder.decode(gamePath.substring(0, gamePath.indexOf('&')), "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				Game newGame = new Game(game.getName(), -1, gamePath, true, PlatformName.ORIGIN);
+				newGame.setAlphAppID(gameId);
+				addGame(newGame);
 			}
+			
 		}
 	}
 

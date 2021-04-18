@@ -61,7 +61,9 @@ public class GameScanController {
 				originNum.setText(gc.getGameList().size() + " games found");
 				break;
 			case STEAM:
-				((Steam) gc).getOwnedGames();
+				if (!Steam.getKey().isEmpty()) {
+					((Steam) gc).getOwnedGames();
+				}
 				steamNum.setText(gc.getGameList().size() + " games found");
 				break;
 			case UPLAY:

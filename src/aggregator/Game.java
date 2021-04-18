@@ -14,6 +14,7 @@ public class Game {
 
 	private String name;
 	private int appID = -1; //not all platforms show game IDs
+	private String alphAppID;
 	private String filepath;
 	private String exe = "none";
 	private int playtime = -1; // not all platforms keep records/make those stats recoverable
@@ -88,7 +89,7 @@ public class Game {
 			Desktop desktopOrigin = getDesktop();
 			URI originProtocol;
 			try {
-				originProtocol = new URI("origin://launchgame/" + appID);
+				originProtocol = new URI("origin://launchgame/" + alphAppID);
 				desktopOrigin.browse(originProtocol);
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
@@ -199,6 +200,13 @@ public class Game {
 	}
 
 	/**
+	 * @return the alphAppID
+	 */
+	public String getAlphAppID() {
+		return alphAppID;
+	}
+
+	/**
 	 * @param isInstalled the isInstalled to set
 	 */
 	public void setIsInstalled(Boolean isInstalled) {
@@ -245,6 +253,13 @@ public class Game {
 	 */
 	public void setExe(String exe) {
 		this.exe = exe;
+	}
+
+	/**
+	 * @param alphAppID the alphAppID to set
+	 */
+	public void setAlphAppID(String alphAppID) {
+		this.alphAppID = alphAppID;
 	}
 
 	@Override
