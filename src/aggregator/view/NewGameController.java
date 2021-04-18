@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -54,23 +55,19 @@ public class NewGameController {
     void initialize() {
     
     platformChoiceBox.getItems().addAll(PlatformName.values());
+    platformChoiceBox.setValue(PlatformName.OTHER);
     
 
     }
     
     @FXML
-    void helloWorld() {
-    	System.out.println("helloWorld!");
-    }
-    
-    @FXML
     void selectFileName() {
-    	FileChooser browse = new FileChooser();
+    	DirectoryChooser browse = new DirectoryChooser();
     	if (lastBrowsedFile != null) {
 			browse.setInitialDirectory(lastBrowsedFile);
 		}
 		browse.setTitle("Select directory");
-    	File selection = browse.showOpenDialog(null);
+    	File selection = browse.showDialog(null);
     	try {
     		fileField.setText(selection.getCanonicalPath());
 		} catch (IOException e) {
@@ -127,6 +124,8 @@ public class NewGameController {
     	
     	close();
     }
+    
+    
     
     @FXML
     void close() {

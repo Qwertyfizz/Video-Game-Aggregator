@@ -1,5 +1,7 @@
 package aggregator.view;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -74,9 +76,15 @@ public class MainViewController {
     
     @FXML
     private Button launchGameButton;
+    
+    @FXML
+    private Button openLocationButton;
 
     @FXML
     void initialize() {
+    	
+    	gameInfoTextField.setEditable(false);
+    	
     	platformChoiceBox.getItems().addAll(PlatformName.values());
     	platformChoiceBox.setValue(PlatformName.ALL);
     	platformChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
@@ -91,13 +99,21 @@ public class MainViewController {
 
 			@Override
 			public void changed(ObservableValue<? extends Game> observable, Game oldValue, Game newValue) {
-				if (!newValue.getIsInstalled()) {
+				if(!newValue.getIsInstalled()) {
 					launchGameButton.setDisable(true);
 				}
 				else {
 					launchGameButton.setDisable(false);
 				}
 				displayGameInfo(newValue);
+			}
+		});
+    	
+    	searchBox.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				filterByName();
 			}
 		});
     	
@@ -167,9 +183,11 @@ public class MainViewController {
     	if(g.getPlaytime() != -1) {
     		gameInfo.append("Playtime: " + g.getPlaytime() + "\n\n");
     	}
-    	gameInfo.append("Platform: " + g.getName() + "\n\n" );
-    	gameInfo.append("Launcher: " + g.getExe() +"\n\n");
-    	if(g.getIsInstalled()) {
+    	gameInfo.append("Platform: " + g.getPlatform().toString().toLowerCase() + "\n\n" );
+    	if (!g.getExe().equals("none")) {
+			gameInfo.append("Launcher: " + g.getExe() + "\n\n");
+		}
+		if(g.getIsInstalled()) {
     		gameInfo.append("This game is currently installed");
     	}
     	else {
@@ -203,7 +221,7 @@ public class MainViewController {
     	}
     	else {
     		for(Game g : displayedList) {
-    			if (g.getName().contains(toFind)) {
+    			if (g.getName().toLowerCase().contains(toFind.toLowerCase())) {
     				temp.add(g);
     			}
     		}
@@ -217,6 +235,16 @@ public class MainViewController {
     @FXML
     private void launchGame() {
     	gameList.getSelectionModel().getSelectedItem().launch();
+    }
+    
+    @FXML
+    void openFileLocation() {
+    	String filepath = gameList.getSelectionModel().getSelectedItem().getFilepath();
+    	try {
+			Desktop.getDesktop().open(new File(filepath));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     private void updateMainList() {
