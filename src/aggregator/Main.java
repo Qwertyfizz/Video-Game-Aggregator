@@ -10,15 +10,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		GUILauncher.main(args);
-//		GameCollector orTest = new Origin();
-//		orTest.scan();
-//		ArrayList<Game> g = orTest.getGameList();
-//		
-//		for (Game e : g) {
-//			System.out.println(e);
-//			System.out.println(e.getFilepath());
-//			System.out.println(e.getAlphAppID());
-//		}
 	}
 
 }
