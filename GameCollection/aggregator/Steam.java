@@ -97,7 +97,9 @@ public class Steam extends GameCollector {
 					}
 				}
 				if(!inList) {
-					getGameList().add(new Game(apiG.name,apiG.playtime_forever,false,PlatformName.STEAM));
+					Game g = new Game(apiG.name,apiG.playtime_forever,false,PlatformName.STEAM);
+					g.setFilepath("none");
+					getGameList().add(g);
 				}
 			}
 			

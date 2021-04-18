@@ -1,5 +1,6 @@
 package aggregator;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -78,10 +79,8 @@ public class Game {
 				steamProtocol = new URI("steam://run/" + appID);
 				desktopSteam.browse(steamProtocol);
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -89,13 +88,11 @@ public class Game {
 			Desktop desktopOrigin = getDesktop();
 			URI originProtocol;
 			try {
-				originProtocol = new URI("origin://launchgame/OFB-EAST:" + appID);
+				originProtocol = new URI("origin://launchgame/" + appID);
 				desktopOrigin.browse(originProtocol);
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -106,10 +103,8 @@ public class Game {
 				uplayProtocol = new URI("uplay://launch/" + appID + "/0");
 				desktopUplay.browse(uplayProtocol);
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -120,17 +115,28 @@ public class Game {
 				epicProtocol = new URI("com.epicgames.launcher://apps/" + exe + "?action=launch&silent=true");
 				desktopEpic.browse(epicProtocol);
 			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
-		default:
+		case GOG:
+			ProcessBuilder pb = new ProcessBuilder();
+			pb.command(new GOG().getGOGPath(), "/command=runGame", "/gameId=" + appID, "/path=" + filepath);
 			try {
-				Runtime run = Runtime.getRuntime();
-				Process proc = run.exec(exe);
+				pb.start();
+			} catch (IOException e1) {
+				System.out.println();
+				e1.printStackTrace();
+			}
+			break;
+		default:
+			File file = new File(exe);
+			ProcessBuilder processBuilder = new ProcessBuilder(file.getAbsolutePath());
+			processBuilder.directory(file.getParentFile());
+			
+			try {
+				processBuilder.start();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
