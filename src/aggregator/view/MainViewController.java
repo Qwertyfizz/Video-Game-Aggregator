@@ -181,7 +181,7 @@ public class MainViewController {
     	}
     	gameInfo.append("Filepath: " + g.getFilepath() + "\n\n" );
     	if(g.getPlaytime() != -1) {
-    		gameInfo.append("Playtime: " + g.getPlaytime() + "\n\n");
+    		gameInfo.append("Playtime: " + parsePlaytime(g.getPlaytime()) + "\n\n");
     	}
     	gameInfo.append("Platform: " + g.getPlatform().toString().toLowerCase() + "\n\n" );
     	if (!g.getExe().equals("none")) {
@@ -245,6 +245,53 @@ public class MainViewController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    private String parsePlaytime(int rawTime) {
+    	
+    	if (rawTime == 0) {
+    		return "Unplayed";
+    	}
+    	
+    	int hours = rawTime / 60;
+    	int min = rawTime % 60;
+    	
+    	if (hours == 0) {
+    		if (min >= 2) {
+				return min + " minutes";
+			}
+    		else {
+    			return min + " minute";
+    		}
+    	}
+    	else if (min == 0) {
+    		if (hours >= 2) {
+				return hours + " hours";
+			}
+    		else {
+    			return hours + " hour";
+    		}
+    	}
+    	else {
+    		String parsedString = "";
+    		if (hours >= 2) {
+    			parsedString += hours + " hours";
+			}
+    		else {
+    			parsedString += hours + " hour";
+    		}
+    		
+    		if (min >= 2) {
+    			parsedString += min + " minutes";
+			}
+    		else {
+    			parsedString += min + " minute";
+    		}
+    		
+    		return parsedString;
+    		
+    	}
+    	
     }
     
     private void updateMainList() {
