@@ -277,10 +277,10 @@ public class MainViewController {
     	else {
     		String parsedString = "";
     		if (hours >= 2) {
-    			parsedString += hours + " hours";
+    			parsedString += hours + " hours, ";
 			}
     		else {
-    			parsedString += hours + " hour";
+    			parsedString += hours + " hour, ";
     		}
     		
     		if (min >= 2) {
