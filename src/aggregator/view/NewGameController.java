@@ -54,8 +54,8 @@ public class NewGameController {
     @FXML
     void initialize() {
     
-    platformChoiceBox.getItems().addAll(PlatformName.values());
-    platformChoiceBox.setValue(PlatformName.OTHER);
+//    platformChoiceBox.getItems().addAll(PlatformName.values());
+//    platformChoiceBox.setValue(PlatformName.OTHER);
     
 
     }
@@ -96,31 +96,8 @@ public class NewGameController {
     
     @FXML
     void addGame() {
-    	Game toAdd = new Game(nameField.getText(),fileField.getText(),launcherField.getText(),true,platformChoiceBox.getValue());
-    	
-    	switch(platformChoiceBox.getValue()) {
-    	case STEAM:
-    		holder.getSteam().addGame(toAdd);
-    		break;
-    	case ORIGIN:
-    		holder.getOrigin().addGame(toAdd);
-    		break;
-    	case EPIC:
-    		holder.getEpic().addGame(toAdd);
-    		break;
-    	case GOG:
-    		holder.getGog().addGame(toAdd);
-    		break;
-    	case UPLAY:
-    		holder.getUplay().addGame(toAdd);
-    		break;
-    	case OTHER:
-    		holder.getOther().addGame(toAdd);
-    		break;
-    	default:
-    		holder.getOther().addGame(toAdd);
-    		break;
-    	}
+    	Game toAdd = new Game(nameField.getText(),fileField.getText(),launcherField.getText(),true,PlatformName.OTHER);
+    	holder.getOther().addGame(toAdd);
     	
     	close();
     }
