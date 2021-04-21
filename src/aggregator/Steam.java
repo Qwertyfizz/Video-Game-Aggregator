@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import aggregator.constants.PlatformName;
+
 public class Steam extends GameCollector {
 	
 	private static final String PLATFORM_INSTALL_KEY = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";

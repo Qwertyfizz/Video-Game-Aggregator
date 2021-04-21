@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.registry.*;
 
+import aggregator.constants.PlatformName;
+
 public class GOG extends GameCollector {
 	private static final String REG_GAME_DIRS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\GOG.com\\Games";// use listRoots on RegistryKey to get array of game keys
 	private static final String GAMENAME_VALUE_NAME = "gameName";

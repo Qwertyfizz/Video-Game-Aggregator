@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.registry.RegistryKey;
 
+import aggregator.constants.PlatformName;
+
 public class Uplay extends GameCollector {
 
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher";

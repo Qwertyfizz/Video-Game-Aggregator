@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import aggregator.constants.PlatformName;
+
 public class Origin extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Origin";
 	private static final String INSTALL_KEY_NAME = "ClientPath";

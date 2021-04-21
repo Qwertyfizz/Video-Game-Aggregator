@@ -4,8 +4,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import aggregator.GameCollector;
-import aggregator.PlatformName;
 import aggregator.Steam;
+import aggregator.constants.PlatformName;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

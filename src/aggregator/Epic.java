@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import aggregator.constants.PlatformName;
+
 public class Epic extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher";
 	private static final String INSTALL_KEY_NAME = "AppDataPath";

@@ -1,4 +1,4 @@
-package aggregator;
+package aggregator.constants;
 
 
 public enum PlatformName {

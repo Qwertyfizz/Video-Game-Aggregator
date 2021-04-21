@@ -7,6 +7,8 @@ import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
 
+import aggregator.constants.PlatformName;
+
 public abstract class GameCollector {
 	private ArrayList<Game> gameList;
 	private String gameListFile = "gameList_"+this.getClass().getName().replaceAll("aggregator.", "")+".json";
