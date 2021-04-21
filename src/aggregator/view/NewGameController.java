@@ -54,9 +54,6 @@ public class NewGameController {
     @FXML
     void initialize() {
     
-//    platformChoiceBox.getItems().addAll(PlatformName.values());
-//    platformChoiceBox.setValue(PlatformName.OTHER);
-    
 
     }
     
