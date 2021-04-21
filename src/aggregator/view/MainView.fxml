@@ -68,7 +68,7 @@
           <Button fx:id="addGameButton" mnemonicParsing="false" onAction="#startNewGame" text="Add Game" />
             <Button fx:id="scanButton" mnemonicParsing="false" onAction="#startGameScan" text="Scan for games" />
             <Button fx:id="launchGameButton" disable="true" mnemonicParsing="false" onAction="#launchGame" text="Launch selected game" />
-            <Button fx:id="openLocationButton" disable="true" mnemonicParsing="false" text="Open folder" />
+            <Button fx:id="openLocationButton" disable="true" mnemonicParsing="false" onAction="#openFileLocation" text="Open folder" />
         </items>
       </ToolBar>
    </bottom>

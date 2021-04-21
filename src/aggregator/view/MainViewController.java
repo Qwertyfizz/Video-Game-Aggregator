@@ -101,9 +101,11 @@ public class MainViewController {
 			public void changed(ObservableValue<? extends Game> observable, Game oldValue, Game newValue) {
 				if(!newValue.getIsInstalled()) {
 					launchGameButton.setDisable(true);
+					openLocationButton.setDisable(true);
 				}
 				else {
 					launchGameButton.setDisable(false);
+					openLocationButton.setDisable(false);
 				}
 				displayGameInfo(newValue);
 			}
