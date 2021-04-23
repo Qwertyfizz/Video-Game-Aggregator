@@ -63,3 +63,14 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'aggregator.Main' // replace with you main class
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

@@ -28,6 +28,9 @@ public final class DataHolder{
 	private GameCollector[] collectors = {steam, origin, epic, gog, uplay, other};
 	private ArrayList<Game> fullList = new ArrayList<>();
 	
+	private String steamID = "";
+	private String steamKey = "";
+	
 	private DataHolder() {}
 	
 	public static DataHolder getInstance() {
@@ -67,6 +70,34 @@ public final class DataHolder{
 	 */
 	public GameCollector getUplay() {
 		return uplay;
+	}
+
+	/**
+	 * @return the steamID
+	 */
+	public String getSteamID() {
+		return steamID;
+	}
+
+	/**
+	 * @return the steamKey
+	 */
+	public String getSteamKey() {
+		return steamKey;
+	}
+
+	/**
+	 * @param steamID the steamID to set
+	 */
+	public void setSteamID(String steamID) {
+		this.steamID = steamID;
+	}
+
+	/**
+	 * @param steamKey the steamKey to set
+	 */
+	public void setSteamKey(String steamKey) {
+		this.steamKey = steamKey;
 	}
 
 	/**

@@ -89,12 +89,8 @@ public class InputOutput {
 
 			return inputLine;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return null;
 		}
-
-		return null;
-
 	}
 	
 	public static String readRegistry(String keyLoc, String keyName) {

@@ -64,7 +64,7 @@ public class Steam extends GameCollector {
 
 	}
 
-	public void getOwnedGames() {
+	public boolean getOwnedGames() {
 		/*
 		 * JSON Reference appid: application ID - can be used for store info name: name
 		 * playtime_forever: Playtime in minutes 
@@ -77,7 +77,11 @@ public class Steam extends GameCollector {
 					+ steamID + "&include_appinfo=true&include_played_free_games=true&include_free_sub=false");
 			String returnedJSON = InputOutput.processRequest(url);
 			
-			//remove the begining and ending wrappers, only the game array is needed
+			if (returnedJSON == null) {
+				return false;
+			}
+			
+			//remove the beginning and ending wrappers, only the game array is needed
 			returnedJSON = returnedJSON.substring(returnedJSON.indexOf('['));
 			returnedJSON = returnedJSON.substring(0, returnedJSON.length()-2);
 			
@@ -105,12 +109,11 @@ public class Steam extends GameCollector {
 				}
 			}
 			
-			
-
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return true;
 	}
 
 	/**

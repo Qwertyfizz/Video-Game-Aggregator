@@ -161,6 +161,24 @@ public class MainViewController {
     }
     
     @FXML
+    void startKeySelection() {
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("KeyInput.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = new Stage();
+        	stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+            stage.setTitle("Enter Steam Key");
+            stage.setResizable(false);
+            stage.showAndWait();
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
     void saveInfo() {
     	for(GameCollector gc : holder.getCollectors()) {
     		gc.saveToFile();
