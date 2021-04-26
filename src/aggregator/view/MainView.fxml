@@ -22,6 +22,7 @@
             <items>
                   <MenuItem fx:id="scanGamesMenu" mnemonicParsing="false" onAction="#startGameScan" text="Scan for games" />
                   <MenuItem fx:id="addGameMenu" mnemonicParsing="false" onAction="#startNewGame" text="Add game to list" />
+                  <MenuItem fx:id="keyMenuItem" mnemonicParsing="false" onAction="#startKeySelection" text="Enter Steam Key" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -53,7 +54,7 @@
                         <Button fx:id="searchButton" mnemonicParsing="false" onAction="#filterByName" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                         <ChoiceBox fx:id="platformChoiceBox" prefHeight="15.0" prefWidth="94.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <Label prefHeight="17.0" prefWidth="64.0" text="Platform" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <RadioButton fx:id="showUnstalled" contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="57.0" prefWidth="94.0" text="Show uninstalled games" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="showUnstalled" contentDisplay="TOP" disable="true" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="57.0" prefWidth="94.0" selected="true" text="Show uninstalled games" textAlignment="CENTER" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </center>

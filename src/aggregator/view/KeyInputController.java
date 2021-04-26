@@ -3,6 +3,7 @@ package aggregator.view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import aggregator.Steam;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -37,8 +38,9 @@ public class KeyInputController {
     
     @FXML
     void setKeyAndClose() {
-    	holder.setSteamID(steamIDTextField.getText());
-    	holder.setSteamKey(apiTextField.getText());
+    	Steam steam = (Steam) holder.getSteam();
+    	steam.setSteamID(steamIDTextField.getText());
+    	steam.setKey(apiTextField.getText());
     	
     	System.out.print(holder.getSteamID() + "  " + holder.getSteamKey());
     	close();

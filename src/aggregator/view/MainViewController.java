@@ -80,6 +80,9 @@ public class MainViewController {
     
     @FXML
     private Button openLocationButton;
+    
+    @FXML
+    private MenuItem keyMenuItem;
 
     @FXML
     void initialize() {
@@ -119,7 +122,6 @@ public class MainViewController {
 				filterByName();
 			}
 		});
-    	
     }
     
     @FXML

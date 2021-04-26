@@ -27,8 +27,8 @@
          <children>
             <Label text="Steam ID" GridPane.halignment="CENTER" />
             <Label text="API Key" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <TextField fx:id="steamIDTextField" disable="true" text="ID Here" GridPane.columnIndex="1" />
-            <TextField fx:id="apiTextField" disable="true" text="Key Here" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="steamIDTextField" GridPane.columnIndex="1" />
+            <TextField fx:id="apiTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>
