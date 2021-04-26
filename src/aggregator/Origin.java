@@ -6,6 +6,11 @@ import java.net.URLDecoder;
 
 import aggregator.constants.PlatformName;
 
+/**
+ * Platform class for Origin
+ * @author dylan
+ *
+ */
 public class Origin extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Origin";
 	private static final String INSTALL_KEY_NAME = "ClientPath";
@@ -54,6 +59,12 @@ public class Origin extends GameCollector {
 		}
 	}
 
+	
+	/**
+	 * Checks if the platform is installed
+	 * @return boolean
+	 * 			true if installed, false otherwise
+	 */
 	@Override
 	public boolean checkForPlatform() {
 		return !InputOutput.readRegistry(INSTALL_REG, INSTALL_KEY_NAME).equals("null");

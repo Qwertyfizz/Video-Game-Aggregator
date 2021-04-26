@@ -33,6 +33,10 @@ public final class DataHolder{
 	
 	private DataHolder() {}
 	
+	/**
+	 * Returns the single instance of the data holder that exists in this runtime
+	 * @return instance
+	 */
 	public static DataHolder getInstance() {
 	    return INSTANCE;
 	}
@@ -121,6 +125,9 @@ public final class DataHolder{
 		return fullList;
 	}
 	
+	/**
+	 * Gets all the games from every platform initialized
+	 */
 	public void refreshMainList() {
 		fullList.clear();
 		for (GameCollector gc : collectors) {

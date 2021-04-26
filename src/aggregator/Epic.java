@@ -6,6 +6,12 @@ import java.util.ArrayList;
 
 import aggregator.constants.PlatformName;
 
+/**
+ * This class manages games from the Epic Games store
+ * 
+ * @author Dylan Bollman
+ *
+ */
 public class Epic extends GameCollector {
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Epic Games\\EpicGamesLauncher";
 	private static final String INSTALL_KEY_NAME = "AppDataPath";
@@ -24,7 +30,6 @@ public class Epic extends GameCollector {
 	 *				isInstalled = true
 	 *				platform = EPIC
 	 *				create a new Game object and add it to the gameList
-	 *		
 	 */
 	@Override
 	public void scan() {
@@ -46,9 +51,6 @@ public class Epic extends GameCollector {
 					String filepath = "";
 					
 					for (String s : gameData) {
-//						if (s.contains("\"LaunchExecutable\": \"")) {
-//							exe = s.split("\"")[3];
-//						}
 						if(s.contains("\"AppName\": \"")) {
 							exe = s.split("\"")[3];
 						}
@@ -65,12 +67,16 @@ public class Epic extends GameCollector {
 				}
 				
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * Checks if the platform is installed
+	 * @return boolean
+	 * 			true if installed, false otherwise
+	 */
 	@Override
 	public boolean checkForPlatform() {
 		return !InputOutput.readRegistry(INSTALL_REG, INSTALL_KEY_NAME).equals("null");

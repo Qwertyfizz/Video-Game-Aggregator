@@ -20,6 +20,8 @@ public class SteamAPIGame {
 	String playtime_linux_forever;
 	
 	/**
+	 * Constructor for a SteamAPIGame
+	 * 
 	 * @param appid
 	 * @param name
 	 * @param playtime_forever
@@ -97,6 +99,9 @@ public class SteamAPIGame {
 		return playtime_linux_forever;
 	}
 
+	/**
+	 * Displays a generic string of the 
+	 */
 	@Override
 	public String toString() {
 		return "SteamAPIGame [appid=" + appid + ", name=" + name + ", playtime_forever=" + playtime_forever

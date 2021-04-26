@@ -12,6 +12,12 @@ import java.awt.Desktop;
 import static java.awt.Desktop.*;
 
 
+/**
+ * Object representing a game and it's associated information
+ * 
+ * @author Dylan Bollman
+ *
+ */
 public class Game {
 
 
@@ -25,6 +31,7 @@ public class Game {
 	private PlatformName platform;
 	
 	/**
+	 * A constructor for a Game object. Primarily used for custom games.
 	 * @param name
 	 * @param filepath
 	 * @param exe
@@ -40,6 +47,14 @@ public class Game {
 		this.platform = platform;
 	}
 	
+	/**
+	 * A constructor for a Game object. Primarily used for GOG and Epic games.
+	 * @param name
+	 * @param appID
+	 * @param filepath
+	 * @param isInstalled
+	 * @param platform
+	 */
 	public Game(String name, int appID, String filepath, boolean isInstalled, PlatformName platform) {
 		this.name = name;
 		this.appID = appID;
@@ -48,6 +63,15 @@ public class Game {
 		this.platform = platform;
 	}
 
+	/**
+	 * A constructor for a Game object. Primarily used for GOG and Epic games.
+	 * @param name
+	 * @param appID
+	 * @param path
+	 * @param exe
+	 * @param isInstalled
+	 * @param platform
+	 */
 	public Game(String name, int appID, String path, String exe, boolean isInstalled, PlatformName platform) {
 		this.name = name;
 		this.appID = appID;
@@ -58,6 +82,7 @@ public class Game {
 	}
 	
 	/**
+	 * A constructor for a Game object. Primarily used for Steam games.
 	 * @param name
 	 * @param appID
 	 * @param isInstalled
@@ -71,6 +96,12 @@ public class Game {
 		this.platform = platform;
 	}
 
+	/**
+	 * Launches a game using its platform's specific launch URL. If one is not available, It will attempt to launch directly from the executable.
+	 * 
+	 * @return boolean
+	 * 			true if successful, else false
+	 */
 	public boolean launch() {
 		if (Boolean.FALSE.equals(isInstalled)) {
 			return false;
@@ -150,6 +181,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the name
 	 * @return the name
 	 */
 	public String getName() {
@@ -157,6 +189,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the filepath
 	 * @return the filepath
 	 */
 	public String getFilepath() {
@@ -164,6 +197,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the platform
 	 * @return the platform
 	 */
 	public PlatformName getPlatform() {
@@ -171,17 +205,23 @@ public class Game {
 	}
 
 	/**
+	 * Returns the playtime in minutes 
 	 * @return the playtime
 	 */
 	public int getPlaytime() {
 		return playtime;
 	}
 
+	/**
+	 * Returns the launcher name
+	 * @return the launcher
+	 */
 	public String getLauncher() {
 		return exe;
 	}
 
 	/**
+	 * Returns isInstalled
 	 * @return the isInstalled
 	 */
 	public Boolean getIsInstalled() {
@@ -189,6 +229,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the app ID
 	 * @return the appID
 	 */
 	public int getAppID() {
@@ -196,6 +237,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the executable name
 	 * @return the exe
 	 */
 	public String getExe() {
@@ -203,6 +245,7 @@ public class Game {
 	}
 
 	/**
+	 * Returns the alphanumerical App ID
 	 * @return the alphAppID
 	 */
 	public String getAlphAppID() {
@@ -210,61 +253,74 @@ public class Game {
 	}
 
 	/**
-	 * @param isInstalled the isInstalled to set
+	 * @param isInstalled
+	 *  the isInstalled to set
 	 */
 	public void setIsInstalled(Boolean isInstalled) {
 		this.isInstalled = isInstalled;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *  the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * @param filepath the filepath to set
+	 * @param filepath
+	 *  the filepath to set
 	 */
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
 	}
 
 	/**
-	 * @param platform the platform to set
+	 * @param
+	 *  platform the platform to set
 	 */
 	public void setPlatform(PlatformName platform) {
 		this.platform = platform;
 	}
 
 	/**
-	 * @param playtime the playtime to set
+	 * @param
+	 *  playtime the playtime to set
 	 */
 	public void setPlaytime(int playtime) {
 		this.playtime = playtime;
 	}
 
 	/**
-	 * @param appID the appID to set
+	 * @param appID
+	 *  the appID to set
 	 */
 	public void setAppID(int appID) {
 		this.appID = appID;
 	}
 
 	/**
-	 * @param exe the exe to set
+	 * @param exe
+	 *  the exe to set
 	 */
 	public void setExe(String exe) {
 		this.exe = exe;
 	}
 
 	/**
-	 * @param alphAppID the alphAppID to set
+	 * @param alphAppID
+	 *  the alphAppID to set
 	 */
 	public void setAlphAppID(String alphAppID) {
 		this.alphAppID = alphAppID;
 	}
 
+	/**
+	 * Returns the name of the game object
+	 * @return name
+	 * 		the name of the game
+	 */
 	@Override
 	public String toString() {
 		return name;

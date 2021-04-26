@@ -7,6 +7,11 @@ import com.registry.RegistryKey;
 
 import aggregator.constants.PlatformName;
 
+/**
+ * Platform class for Uplay
+ * @author dylan
+ *
+ */
 public class Uplay extends GameCollector {
 
 	private static final String INSTALL_REG = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Ubisoft\\Launcher";
@@ -34,6 +39,12 @@ public class Uplay extends GameCollector {
 		}
 	}
 
+	
+	/**
+	 * Checks if the platform is installed
+	 * @return boolean
+	 * 			true if installed, false otherwise
+	 */
 	@Override
 	public boolean checkForPlatform() {
 		return !InputOutput.readRegistry(INSTALL_REG, INSTALL_KEY_NAME).equals("null");

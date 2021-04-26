@@ -14,6 +14,9 @@ public class GUILauncher extends Application {
 	private Stage primaryStage;
 	private BorderPane mainLayout;
 
+	/**
+	 * Starts the GUI element
+	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		this.primaryStage = primaryStage;
@@ -21,6 +24,10 @@ public class GUILauncher extends Application {
 		showMainView();
 	}
 	
+	/**
+	 * Displays the Main window
+	 * @throws IOException
+	 */
 	private void showMainView() throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("view/MainView.fxml"));
@@ -32,14 +39,6 @@ public class GUILauncher extends Application {
 	}
 
 	public static void main(String[] args) {
-		
-//		for (GameCollector collector : collectors) {
-//			collector.loadFromFile();
-//			for (Game g : collector.getGameList()) {
-//				fullList.add(g);
-//			}
-//		}
-		
 		launch(args);
 	}
 }

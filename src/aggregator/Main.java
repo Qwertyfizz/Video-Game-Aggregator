@@ -1,6 +1,5 @@
 package aggregator;
 
-import java.util.ArrayList;
 
 /**
  * Main method for redirecting to the GUI Launcher

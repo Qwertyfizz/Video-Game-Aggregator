@@ -10,22 +10,29 @@ import com.google.gson.Gson;
 
 import aggregator.constants.PlatformName;
 
+/**
+ * Platform class for Steam
+ * @author dylan
+ *
+ */
 public class Steam extends GameCollector {
 	
 	private static final String PLATFORM_INSTALL_KEY = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\Valve\\Steam";
 	private static final String PLATFORM_INSTALL_VALUE = "InstallPath";
-	
-	
+	private String steamID = "";
 	private static String key = "";
-	private static String steamID = "";
-
+	
+	
 	/**
-	 * 
+	 * Constructor for a Steam object
 	 */
 	public Steam() {
 		super();
 	}
 
+	/**
+	 * Gets games installed on the hard drive
+	 */
 	@Override
 	public void scan() {
 		getInstalledGames();
@@ -73,7 +80,7 @@ public class Steam extends GameCollector {
 		 */
 		URL url;
 		try {
-			url = new URL("https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=" + key + "&steamid="
+			url = new URL("https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/?key=" + key  + "&steamid="
 					+ steamID + "&include_appinfo=true&include_played_free_games=true&include_free_sub=false");
 			String returnedJSON = InputOutput.processRequest(url);
 			
@@ -110,7 +117,6 @@ public class Steam extends GameCollector {
 			}
 			
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;
@@ -126,24 +132,30 @@ public class Steam extends GameCollector {
 	/**
 	 * @return the steamID
 	 */
-	public static String getSteamID() {
+	public String getSteamID() {
 		return steamID;
 	}
 
 	/**
 	 * @param key the key to set
 	 */
-	public static void setKey(String key) {
+	public void setKey(String key) {
 		Steam.key = key;
 	}
 
 	/**
 	 * @param steamID the steamID to set
 	 */
-	public static void setSteamID(String steamID) {
-		Steam.steamID = steamID;
+	public void setSteamID(String steamID) {
+		this.steamID = steamID;
 	}
 
+	
+	/**
+	 * Checks if the platform is installed
+	 * @return boolean
+	 * 			true if installed, false otherwise
+	 */
 	@Override
 	public boolean checkForPlatform() {
 		return !InputOutput.readRegistry(PLATFORM_INSTALL_KEY, PLATFORM_INSTALL_VALUE).equals("null");

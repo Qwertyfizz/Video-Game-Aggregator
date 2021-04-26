@@ -6,6 +6,10 @@ import com.registry.*;
 
 import aggregator.constants.PlatformName;
 
+/**
+ * Platform class for GOG
+ * @author dylan
+ */
 public class GOG extends GameCollector {
 	private static final String REG_GAME_DIRS = "HKEY_LOCAL_MACHINE\\SOFTWARE\\WOW6432Node\\GOG.com\\Games";// use listRoots on RegistryKey to get array of game keys
 	private static final String GAMENAME_VALUE_NAME = "gameName";
@@ -31,12 +35,20 @@ public class GOG extends GameCollector {
 			addGame(new Game(name, Integer.valueOf(appId), path, exe, true, PlatformName.GOG));
 		}
 	}
-
+	
+	/**
+	 * Checks if the platform is installed
+	 * @return boolean
+	 * 			true if installed, false otherwise
+	 */
 	@Override
 	public boolean checkForPlatform() {
 		return !InputOutput.readRegistry(REG_GAME_DIRS, GAMENAME_VALUE_NAME).equals("null");
 	}
 	
+	/** Returns the path to the GOG clients location
+	 * @return launcherPath
+	 */
 	public String getGOGPath() {
 		return launcherPath + "\\GalaxyClient.exe";
 	}
