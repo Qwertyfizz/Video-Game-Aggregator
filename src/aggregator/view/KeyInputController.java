@@ -9,6 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the key input prompt
+ * @author dylan
+ *
+ */
 public class KeyInputController {
 
 	private DataHolder holder = DataHolder.getInstance();
@@ -36,6 +41,9 @@ public class KeyInputController {
     	
     }
     
+    /**
+     * Set the steam key data and close the prompt
+     */
     @FXML
     void setKeyAndClose() {
     	Steam steam = (Steam) holder.getSteam();
@@ -46,6 +54,9 @@ public class KeyInputController {
     	close();
     }
     
+    /**
+     * Close the prompt
+     */
     @FXML
     void close() {
     	Stage stage = (Stage) cancelButton.getScene().getWindow();

@@ -8,6 +8,11 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 
+/**
+ * The window displaying information about the program
+ * @author Dylan Bollman
+ *
+ */
 public class AboutController {
 
     @FXML

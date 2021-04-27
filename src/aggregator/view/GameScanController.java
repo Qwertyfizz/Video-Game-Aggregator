@@ -11,6 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Window that scans the computer and displays the number of games found
+ * @author dylan
+ *
+ */
 public class GameScanController {
 
 	private DataHolder holder = DataHolder.getInstance();
@@ -39,11 +44,17 @@ public class GameScanController {
     @FXML
     private Button doneButton;
 
+    /**
+     * Calls the scan function upon launch
+     */
     @FXML
     void initialize() {
         preformScan();
     }
     
+    /**
+     * Scan every platform detected on the computer
+     */
     @FXML
     void preformScan() {
     	GameCollector[] collectors = holder.getCollectors();
@@ -76,6 +87,9 @@ public class GameScanController {
         
     }
     
+    /**
+     * Close the window
+     */
     @FXML
     void close() {
     	Stage stage = (Stage) doneButton.getScene().getWindow();

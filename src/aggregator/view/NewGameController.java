@@ -15,6 +15,11 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the Add new game window
+ * @author dylan
+ *
+ */
 public class NewGameController {
 
 	private DataHolder holder = DataHolder.getInstance();
@@ -57,6 +62,9 @@ public class NewGameController {
 
     }
     
+    /**
+     * File chooser for file path
+     */
     @FXML
     void selectFileName() {
     	DirectoryChooser browse = new DirectoryChooser();
@@ -74,6 +82,9 @@ public class NewGameController {
     	fileField.setDisable(true);
     }
     
+    /**
+     * File chooser for executeable
+     */
     @FXML
     void selectFileLauncher() {
     	FileChooser browse = new FileChooser();
@@ -91,6 +102,9 @@ public class NewGameController {
     	launcherField.setDisable(true);
     }
     
+    /**
+     * Adds the selected game to the DataHolder list
+     */
     @FXML
     void addGame() {
     	Game toAdd = new Game(nameField.getText(),fileField.getText(),launcherField.getText(),true,PlatformName.OTHER);
@@ -101,6 +115,9 @@ public class NewGameController {
     
     
     
+    /**
+     * Closes the window
+     */
     @FXML
     void close() {
     	Stage stage = (Stage) cancelButton.getScene().getWindow();

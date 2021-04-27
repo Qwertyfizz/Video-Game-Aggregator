@@ -27,6 +27,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the main window
+ * @author dylan
+ *
+ */
 public class MainViewController {
 	
 	private DataHolder holder = DataHolder.getInstance();
@@ -84,6 +89,9 @@ public class MainViewController {
     @FXML
     private MenuItem keyMenuItem;
 
+    /**
+     * Initializes the various window properties and event handlers
+     */
     @FXML
     void initialize() {
     	
@@ -124,6 +132,9 @@ public class MainViewController {
 		});
     }
     
+    /**
+     * Opens the game scan prompt
+     */
     @FXML
     void startGameScan() {
     	try {
@@ -143,6 +154,9 @@ public class MainViewController {
     	}
     }
     
+    /**
+     * Opens the add new game prompt
+     */
     @FXML
     void startNewGame() {
     	try {
@@ -162,6 +176,9 @@ public class MainViewController {
     	
     }
     
+    /**
+     * Opens the key input prompt
+     */
     @FXML
     void startKeySelection() {
     	try {
@@ -180,6 +197,9 @@ public class MainViewController {
         }
     }
     
+    /**
+     * Saves the current game list to a JSON file
+     */
     @FXML
     void saveInfo() {
     	for(GameCollector gc : holder.getCollectors()) {
@@ -187,6 +207,9 @@ public class MainViewController {
     	}
     }
     
+    /**
+     * Loads game information from each platforms file
+     */
     @FXML
     void loadInfo() {
     	for(GameCollector gc : holder.getCollectors()) {
@@ -196,6 +219,11 @@ public class MainViewController {
     	updateMainList();
     }
     
+    /**
+     * Displays various info about the game in the text box
+     * @param g
+     * 	The game to display
+     */
     private void displayGameInfo(Game g) {
     	StringBuilder gameInfo = new StringBuilder();
     	gameInfo.append("Name: " + g.getName() + "\n\n" );
@@ -220,6 +248,11 @@ public class MainViewController {
     	gameInfoTextField.setText(gameInfo.toString());
     }
 
+    /**
+     * filters the list by platform
+     * @param selection
+     * 		the selected platform name
+     */
     private void filterByPlatform(PlatformName selection) {
     	gameList.getItems().clear();
     	if (selection == PlatformName.ALL) {
@@ -234,6 +267,9 @@ public class MainViewController {
     	}
     }
     
+    /**
+     * filters the list by name
+     */
     @FXML
     void filterByName() {
     	updateMainList();
@@ -255,11 +291,17 @@ public class MainViewController {
     	}
     }
     
+    /**
+     * Calls the selected Game object's inherent launch function
+     */
     @FXML
     private void launchGame() {
     	gameList.getSelectionModel().getSelectedItem().launch();
     }
     
+    /**
+     * Opens the file explorer at the current game's directory
+     */
     @FXML
     void openFileLocation() {
     	String filepath = gameList.getSelectionModel().getSelectedItem().getFilepath();
@@ -270,6 +312,13 @@ public class MainViewController {
 		}
     }
     
+    /**
+     * Translates playtime in minutes to hours and minutes
+     * @param rawTime
+     * 		the time in minutes
+     * @return parsedString
+     * 		the String to display
+     */
     private String parsePlaytime(int rawTime) {
     	
     	if (rawTime == 0) {
@@ -317,6 +366,9 @@ public class MainViewController {
     	
     }
     
+    /**
+     * Updates the main list to the most recent version
+     */
     private void updateMainList() {
     	holder.refreshMainList();
     	displayedList = new ArrayList<>(holder.getFullList());
